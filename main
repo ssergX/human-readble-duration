@@ -1,0 +1,57 @@
+
+
+def format_duration2(remainder):
+    now = 0
+    minute = 60
+    hour = 3600
+    days = 86400
+    years = 31536000
+    two_days= 86400 + 86400
+    if remainder == now:
+        return now
+    if remainder % years == 0:
+        answer_years = f"{remainder // years} year" if remainder == years else f"{int(remainder / years)} years"
+        return answer_years
+    if remainder % years != years:
+        answer_years = f"{remainder // years} year" if remainder // years == 1 else f"{int(remainder / years)} years"
+        remainder = remainder % years
+
+    if remainder % days == 0:
+        answer_days = f"{int(remainder // days)} day" if remainder < days * 2 else f"{int(remainder / days)} days"
+        return f"{answer_years}, {answer_days}"
+    if remainder % days != days:
+        answer_days = f"{remainder // days} day" if remainder < days * 2 else f"{int(remainder / days)} days"
+        remainder = remainder % days
+
+    if remainder % hour == 0:
+        answer_hour = f"{remainder // hour} hour" if remainder < 2 * hour else f"{int(remainder / hour)} hours"
+    if remainder % hour != hour:
+        answer_hour = f"{remainder // hour} hour" if remainder < 2 * hour else f"{int(remainder / hour)} hours"
+        remainder = remainder % hour
+
+    if remainder % minute == 0:
+        answer_minute = f"{remainder // minute} hour" if remainder < 2 * minute else f"{int(remainder / minute)} hours"
+    if remainder % minute != minute:
+        answer_minute = f"{remainder // minute} minute" if remainder < 2 * minute else f"{int(remainder / minute)} minutes"
+        remainder = remainder % minute
+
+    if  remainder < 60:
+        answer_seconds = f"{remainder} second" if remainder == 1 else f"{int(remainder)} seconds"
+    array = f"{answer_years}, {answer_days},  {answer_hour}, {answer_minute} and {answer_seconds}"
+    array = array.replace("  ", " ")
+    a = array.replace("0 years,", "")
+    a = a.replace("0 day,", "")
+    a = a.replace("0 hour,", "")
+    a = a.replace("0 minute", "")
+    a = a.replace(",  0 seconds","")
+    a = a.replace("and 0 seconds","")
+    a = a.replace("  "," ")
+    return a
+
+
+
+
+
+
+c = format_duration2(31536000 + 60 + 36000)
+print(c)
